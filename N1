@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApplication2
+{
+    class Ms
+    {
+        int[] mas;
+        public Ms(int n)
+        {
+            mas = new int[n];
+            Random rnd = new Random();
+            for (int i = 0; i < n; i++)
+                mas[i] = rnd.Next();
+        }
+
+        public int this[int index]
+        {
+            get
+            {
+                return mas[index];
+            }
+            set
+            {
+                mas[index] = value;
+            }
+        }
+
+        public void SortPlus()
+        {
+            Array.Sort(mas);
+        }
+
+        public void SortMinus()
+        {
+            Array.Sort(mas);
+            Array.Reverse(mas);
+        }
+    };
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите число: ");
+            string nString = Console.ReadLine();
+            int n;
+            int.TryParse(nString,out n);
+            Ms[] mas=new Ms[n];
+            Random rnd = new Random();
+            int[] imas = new int[n];
+            for (int i = 0; i < n; )
+            {
+                int k = rnd.Next(0,25);
+                if (!imas.Contains(k))
+                {
+                    imas[i] = k;
+                    mas[i] = new Ms(k);
+                    if (i % 2 == 0)
+                        mas[i].SortPlus();
+                    else
+                        mas[i].SortMinus();
+                    for (int j = 0; j < k; j++)
+                        Console.WriteLine(mas[i][j] + " ");
+                    Console.WriteLine("\n");
+                    i++;
+                }
+            }
+            Console.WriteLine("Результат: \n");
+            Console.ReadKey();
+        }
+    }
+}
